@@ -1,12 +1,34 @@
 // In index.js of a new project
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { Navigation } from 'react-native-navigation';
+import {View, Text, Button, StyleSheet} from 'react-native';
+import {AccessToken, LoginButton} from 'react-native-fbsdk-next';
+import {Navigation} from 'react-native-navigation';
 
 const HomeScreen = (props: any) => {
+  console.log(`HomeScreen`);
   return (
     <View style={styles.root}>
       <Text>Home Screen</Text>
+      <LoginButton
+        style={{
+          width: '100%',
+          paddingVertical: 16,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        onLoginFinished={(error, result) => {
+          if (error) {
+            console.log('login has error: ' + result.error);
+          } else if (result.isCancelled) {
+            console.log('login is cancelled.');
+          } else {
+            AccessToken.getCurrentAccessToken().then(data => {
+              console.log(data.accessToken.toString());
+            });
+          }
+        }}
+        onLogoutFinished={() => console.log('logout.')}
+      />
     </View>
   );
 };
@@ -19,12 +41,12 @@ Navigation.events().registerAppLaunchedListener(async () => {
         children: [
           {
             component: {
-              name: 'Home'
-            }
-          }
-        ]
-      }
-    }
+              name: 'Home',
+            },
+          },
+        ],
+      },
+    },
   });
 });
 
@@ -33,6 +55,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
+    backgroundColor: 'whitesmoke',
+  },
 });

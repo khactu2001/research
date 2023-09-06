@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">research</string>
+    <string name="facebook_app_id">1294705821413120</string>
+    <string name="fb_login_protocol_scheme">fb1294705821413120</string>
+    <string name="facebook_client_token">ced8fc8d4e5395c9608abfc0019147e3</string>
+    <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
+<string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
 </resources>

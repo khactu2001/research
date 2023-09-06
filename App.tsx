@@ -16,13 +16,10 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import { Navigation } from 'react-native-navigation';
+import {AccessToken, LoginButton} from 'react-native-fbsdk-next';
+import {Navigation} from 'react-native-navigation';
 
-import {
-  Colors,
-  Header
-} from 'react-native/Libraries/NewAppScreen';
-
+import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
 
 function App(props): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -45,18 +42,40 @@ function App(props): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Button onPress={() => Navigation.push(props.componentId, {
-            component: {
-              name: 'Settings',
-              options: {
-                topBar: {
-                  title: {
-                    text: 'Settings'
-                  }
-                }
-              }
+          <Button
+            onPress={() =>
+              Navigation.push(props.componentId, {
+                component: {
+                  name: 'Settings',
+                  options: {
+                    topBar: {
+                      title: {
+                        text: 'Settings',
+                      },
+                    },
+                  },
+                },
+              })
             }
-          })} title='Press me' />
+            title="Go to Settings"
+          />
+          <Button
+            onPress={() =>
+              Navigation.push(props.componentId, {
+                component: {
+                  name: 'Home',
+                  options: {
+                    topBar: {
+                      title: {
+                        text: 'Home screen',
+                      },
+                    },
+                  },
+                },
+              })
+            }
+            title="Go to Home"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -88,14 +107,14 @@ const SettingsScreen = () => {
       <Text>Settings Screen</Text>
     </View>
   );
-}
+};
 Navigation.registerComponent('Settings', () => SettingsScreen);
 const styles = StyleSheet.create({
   root: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'whitesmoke'
-  }
+    backgroundColor: 'whitesmoke',
+  },
 });
 export default App;
