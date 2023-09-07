@@ -5,7 +5,6 @@ import {AccessToken, LoginButton} from 'react-native-fbsdk-next';
 import {Navigation} from 'react-native-navigation';
 
 const HomeScreen = (props: any) => {
-  console.log(`HomeScreen`);
   return (
     <View style={styles.root}>
       <Text>Home Screen</Text>
@@ -29,26 +28,31 @@ const HomeScreen = (props: any) => {
         }}
         onLogoutFinished={() => console.log('logout.')}
       />
+
+      <Button
+        onPress={() =>
+          Navigation.push(props.componentId, {
+            component: {
+              name: 'Settings',
+            },
+          })
+        }
+        title="Go to Settings"
+      />
     </View>
   );
 };
-Navigation.registerComponent('Home', () => HomeScreen);
-
-Navigation.events().registerAppLaunchedListener(async () => {
-  Navigation.setRoot({
-    root: {
-      stack: {
-        children: [
-          {
-            component: {
-              name: 'Home',
-            },
-          },
-        ],
-      },
+HomeScreen.options = {
+  topbar: {
+    title: {
+      text: 'Home Screen',
     },
-  });
-});
+  },
+  bottomTab: {
+    text: 'Home',
+  },
+};
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   root: {

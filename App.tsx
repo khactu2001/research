@@ -20,6 +20,8 @@ import {AccessToken, LoginButton} from 'react-native-fbsdk-next';
 import {Navigation} from 'react-native-navigation';
 
 import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
+import SettingsScreen from './src/modules/settings/Settings';
+import HomeScreen from './src/modules/home/Home';
 
 function App(props): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -37,7 +39,7 @@ function App(props): JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
+        {/* <Header /> */}
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -81,40 +83,6 @@ function App(props): JSX.Element {
     </SafeAreaView>
   );
 }
-
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
-
-const SettingsScreen = () => {
-  return (
-    <View style={styles.root}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-};
+Navigation.registerComponent('Home', () => HomeScreen);
 Navigation.registerComponent('Settings', () => SettingsScreen);
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'whitesmoke',
-  },
-});
 export default App;
